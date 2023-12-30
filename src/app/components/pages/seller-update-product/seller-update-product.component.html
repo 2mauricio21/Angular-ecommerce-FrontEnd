@@ -1,0 +1,82 @@
+<div class="container">
+  <!-- cadastro -->
+  <div class="sign-up mx-auto mb-3" style="max-width: 600px">
+    <h1 class="py-3 d-flex justify-content-center">ATUALIZAR PRODUTOS</h1>
+    <form #addProduct="ngForm" (ngSubmit)="submit(addProduct.value)">
+      <div *ngIf="productMessage" class="alert alert-success" role="alert">{{
+        productMessage
+      }}</div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nome do produto"
+          ngModel="{{ productData?.name }}"
+          id="name"
+          name="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Preço:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Preço"
+          ngModel="{{ productData?.price }}"
+          id="price"
+          name="price"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="color" class="form-label">Cor:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Cor do produto"
+          id="color"
+          ngModel="{{ productData?.color }}"
+          name="color"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">Categoria:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Categoria"
+          id="category"
+          ngModel="{{ productData?.category }}"
+          name="category"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Imagem (Link):</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Link da Imagem do produto"
+          id="image"
+          ngModel="{{ productData?.image }}"
+          name="image"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label"
+          >Descrição do produto:</label
+        >
+        <textarea
+          type="text"
+          class="form-control"
+          placeholder="Escreva a descrição"
+          id="description"
+          ngModel="{{ productData?.description }}"
+          name="description"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary px-3 py-2">
+        Salvar alteração
+      </button>
+    </form>
+  </div>
+</div>

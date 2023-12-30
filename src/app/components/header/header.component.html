@@ -1,0 +1,149 @@
+<nav class="navbar py-3 navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <!-- logo usuario -->
+    <a
+      *ngIf="menuType === 'default'"
+      class="navbar-brand pe-5 me-5"
+      routerLink="/"
+      >Loja do Mauricio</a
+    >
+    <a
+    *ngIf="menuType === 'user'"
+    class="navbar-brand pe-5 me-5"
+    routerLink="/"
+    >Loja do Mauricio</a
+  >
+    <!-- logo seller -->
+    <a
+      *ngIf="menuType === 'seller'"
+      class="navbar-brand pe-5 me-5"
+      routerLink="/seller-home"
+      >Loja do Mauricio</a
+    >
+    <!-- menu burguer -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="justify-content-center collapse navbar-collapse justify-content-between"
+      id="navbarTogglerDemo02"
+    >
+      <!-- pesquisa -->
+      <div class="w-50">
+        <div class="d-flex" role="search" *ngIf="menuType === 'default' || 'user'">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Procurar produto"
+            aria-label="Digite um produto para pesquisar"
+            id="navbarSupportedContent"
+            #searchInput
+            (keyup)="searchProducts($event)"
+            (blur)="hideSearch()"
+          />
+          <button class="btn btn-outline-light" (click)="submitSearch(searchInput.value)">Pesquisar</button>
+          <ul class="suggested-search" *ngIf="searchResult">
+            <li *ngFor="let item of searchResult">
+              <a (mousedown)="redirectToDetails(item.id)"> {{ item.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Menu Type -->
+      <div [ngSwitch]="menuType">
+        <!-- links type Default -->
+        <ul *ngSwitchCase="'default'" class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/seller-auth">Vendedor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/user-auth">Login / Cadastrar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link position-relative" (click)="open()"
+              >Carrinho
+              <span
+                class="position-absolute top-0 translate-middl badge rounded-pill bg-danger"
+              >
+                0
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <!-- User -->
+        <ul *ngSwitchCase="'user'" class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page">
+              {{ userName | titlecase }}</a
+              >
+            </li>
+          <li class="nav-item">
+            <a class="nav-link pe-auto" aria-current="page" (click)="userLogout()"
+            >sair</a
+            >
+          </li>
+            <li class="nav-item">
+              <a class="nav-link position-relative" (click)="open()"
+                >Carrinho
+                <span
+                  class="position-absolute top-0 translate-middl badge rounded-pill bg-danger"
+                >
+                  0
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </a>
+            </li>
+        </ul>
+        <!-- links type seller -->
+        <ul *ngSwitchCase="'seller'" class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="seller-home"
+              >Lista de Produtos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              aria-current="page"
+              routerLink="seller-add-product"
+              >Add Produtos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pe-auto" aria-current="page" (click)="logout()"
+              >sair</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page">
+              {{ sellerName | titlecase }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,90 @@
+<div class="container">
+  <!-- cadastro -->
+  <div *ngIf="!showLogin" class="sign-up mx-auto pt-3" style="max-width: 600px">
+    <h1 class="py-3 d-flex justify-content-center">Cadastro de Usuario</h1>
+    <form #userSignUp="ngForm" (ngSubmit)="signUp(userSignUp.value)">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Digite seu nome"
+          id="nome"
+          ngModel
+          name="nome"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Digite seu email"
+          id="email"
+          ngModel
+          name="email"
+          [required]="true"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha:</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Digite sua senha"
+          id="password"
+          ngModel
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary px-3 py-2">Cadastrar</button>
+      <p class="py-3">
+        Já possui cadastro?
+        <a class="txtOpenLogin text-decoration-none pointer" (click)="openLogin()">
+          - CLICK AQUI PARA ENTRAR
+        </a>
+      </p>
+      <p *ngIf="msgErroCadastro" class="alert alert-danger" role="alert">{{msgErroCadastro}}</p>
+    </form>
+  </div>
+  <!-- login -->
+  <div *ngIf="showLogin" class="sign-up mx-auto pt-3" style="max-width: 600px">
+    <h1 class="py-3 d-flex justify-content-center">Login</h1>
+    <form #userLogin="ngForm" (ngSubmit)="login(userLogin.value)">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Digite seu email"
+          id="email"
+          ngModel
+          name="email"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha:</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Digite sua senha"
+          id="password"
+          ngModel
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary px-3 py-2">Entrar</button>
+      <p class="py-3">
+        Ainda não possui cadastro?
+        <a class="txtOpenLogin text-decoration-none pointer" (click)="openSignUp()">
+          - CLICK AQUI PARA CADASTRAR
+        </a>
+      </p>
+      <p *ngIf="authError" class="alert alert-danger" role="alert">{{authError}}</p>
+    </form>
+  </div>
+</div>

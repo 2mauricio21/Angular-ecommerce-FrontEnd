@@ -1,0 +1,30 @@
+@media screen and (max-width: 474px) {
+  #navbarSupportedContent {
+    min-width: 10.5rem;
+  }
+}
+@media screen and (max-width: 340px) {
+  #navbarSupportedContent {
+    min-width: 8.5rem;
+  }
+}
+
+.suggested-search{
+  position: absolute;
+  top: 50px;
+  z-index: 10;
+  display: list-item !important;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  width: 300px;
+}
+.suggested-search li{
+  padding: 5px;
+  border: 1px solid #ddd;
+  list-style: none;
+}
+.suggested-search li a{
+  cursor: pointer;
+  color: green;
+}
+

@@ -1,0 +1,76 @@
+<div class="container">
+  <!-- cadastro -->
+  <div  class="sign-up mx-auto mb-3" style="max-width: 600px">
+    <h1 class="py-3 d-flex justify-content-center">CADASTROS DE PRODUTOS</h1>
+    <form #addProduct="ngForm" (ngSubmit)="submit(addProduct.value)">
+      <span class="badge rounded-pill text-bg-success">{{addProductMessage}}</span>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nome do produto"
+          id="name"
+          ngModel
+          name="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Preço:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Preço"
+          id="price"
+          ngModel
+          name="price"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="color" class="form-label">Cor:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Cor do produto"
+          id="color"
+          ngModel
+          name="color"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">Categoria:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Categoria"
+          id="category"
+          ngModel
+          name="category"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Imagem (Link):</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Link da Imagem do produto"
+          id="image"
+          ngModel
+          name="image"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Descrição do produto:</label>
+        <textarea
+          type="text"
+          class="form-control"
+          placeholder="Escreva a descrição"
+          id="description"
+          ngModel
+          name="description"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary px-3 py-2">Cadastrar</button>
+    </form>
+  </div>
+</div>
