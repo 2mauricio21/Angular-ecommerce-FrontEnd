@@ -32,6 +32,7 @@ export interface IUserLogin {
 }
 
 export interface ICart {
+  quantity: any;
   id: number | undefined,
   name: string,
   price: number,
@@ -49,4 +50,13 @@ export interface IPriceSumary{
   tax: number,
   delivery: number,
   total: number;
+}
+
+export interface IOrder{ 
+  email: string,
+  address: string,
+  contact: string,
+  totalprice: number,
+  userId: number,
+  id: number | undefined;
 }

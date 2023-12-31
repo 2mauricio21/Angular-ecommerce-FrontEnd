@@ -1,22 +1,51 @@
 <div class="row product-details" *ngIf="productData">
   <div class="col-sm-6">
-    <img [src]="productData.image" class="product-image" alt="Responsive image">
+    <img
+      [src]="productData.image"
+      class="product-image"
+      alt="Responsive image"
+    />
   </div>
   <div class="col-sm-6">
     <div class="details">
-      <h1 class="title">{{productData.name}}</h1>
-      <h6 class="price">Preço: {{productData.price | currency:'BRL':true}}</h6>
-      <h5>Cor: {{productData.color}}</h5>
-      <h6>Categoria: {{productData.category}}</h6>
+      <h1 class="title">{{ productData.name }}</h1>
+      <h6 class="price">
+        Preço: {{ productData.price | currency : "BRL" : "symbol" }}
+      </h6>
+      <h5>Cor: {{ productData.color }}</h5>
+      <h6>Categoria: {{ productData.category }}</h6>
       <h6>Descrição:</h6>
-      <textarea class="description" readonly >{{productData.description}}</textarea>
-      <button class="btn btn-outline-primary form-button ">Comprar</button>
-      <button *ngIf="!removeCart" class="btn btn-outline-primary form-button" (click)="addToCart()"> + Carrinho</button>
-      <button *ngIf="removeCart" class="btn btn-outline-danger form-button" (click)="removeToCart(productData.id)">Remover Produto</button>
+      <textarea class="description" readonly>{{
+        productData.description
+      }}</textarea>
+      <button (click)="addToCart()" (click)="navigateCheckout()" class="btn btn-outline-primary form-button">Comprar</button>
+      <button
+        *ngIf="!removeCart"
+        class="btn btn-outline-primary form-button"
+        (click)="addToCart()"
+      >
+        + Carrinho
+      </button>
+      <button
+        *ngIf="removeCart"
+        class="btn btn-outline-danger form-button"
+        (click)="removeToCart(productData.id)"
+      >
+        Remover Produto
+      </button>
       <div class="quantity-group">
-        <button (click)="handleQuntity('min')" class="btn btn-outline-success">-</button>
-        <input class="btn btn-outline-dark" type="text" value="{{productQuantity}}" readonly>
-        <button (click)="handleQuntity('plus')" class="btn btn-outline-success">+</button>
+        <button (click)="handleQuntity('min')" class="btn btn-outline-success">
+          -
+        </button>
+        <input
+          class="btn btn-outline-dark"
+          type="text"
+          value="{{ productQuantity }}"
+          readonly
+        />
+        <button (click)="handleQuntity('plus')" class="btn btn-outline-success">
+          +
+        </button>
       </div>
     </div>
   </div>

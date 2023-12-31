@@ -7,12 +7,9 @@
       routerLink="/"
       >Loja do Mauricio</a
     >
-    <a
-    *ngIf="menuType === 'user'"
-    class="navbar-brand pe-5 me-5"
-    routerLink="/"
-    >Loja do Mauricio</a
-  >
+    <a *ngIf="menuType === 'user'" class="navbar-brand pe-5 me-5" routerLink="/"
+      >Loja do Mauricio</a
+    >
     <!-- logo seller -->
     <a
       *ngIf="menuType === 'seller'"
@@ -38,7 +35,11 @@
     >
       <!-- pesquisa -->
       <div class="w-50">
-        <div class="d-flex" role="search" *ngIf="menuType === 'default' || 'user'">
+        <div
+          class="d-flex"
+          role="search"
+          *ngIf="menuType === 'default' || 'user'"
+        >
           <input
             class="form-control me-2"
             type="search"
@@ -49,7 +50,12 @@
             (keyup)="searchProducts($event)"
             (blur)="hideSearch()"
           />
-          <button class="btn btn-outline-light" (click)="submitSearch(searchInput.value)">Pesquisar</button>
+          <button
+            class="btn btn-outline-light"
+            (click)="submitSearch(searchInput.value)"
+          >
+            Pesquisar
+          </button>
           <ul class="suggested-search" *ngIf="searchResult">
             <li *ngFor="let item of searchResult">
               <a (mousedown)="redirectToDetails(item.id!)"> {{ item.name }}</a>
@@ -74,12 +80,12 @@
             <a class="nav-link" routerLink="/user-auth">Login / Cadastrar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link position-relative" (click)="open()"
+            <a class="nav-link position-relative" (click)="cartItens > 0 ? open() : null"
               >Carrinho
               <span
                 class="position-absolute top-0 translate-middl badge rounded-pill bg-danger"
               >
-                {{cartItens}}
+                {{ cartItens }}
                 <!-- class="visually-hidden" -->
               </span>
             </a>
@@ -95,24 +101,32 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page">
               {{ userName | titlecase }}</a
-              >
-            </li>
-          <li class="nav-item">
-            <a class="nav-link pe-auto" aria-current="page" (click)="userLogout()"
-            >sair</a
             >
           </li>
-            <li class="nav-item">
-              <a class="nav-link position-relative" (click)="open()"
-                >Carrinho
-                <span
-                  class="position-absolute top-0 translate-middl badge rounded-pill bg-danger"
-                >
-                {{cartItens}}
-                  <span class="visually-hidden">unread messages</span>
-                </span>
-              </a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="my-orders"
+              >Meus Pedidos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link pe-auto"
+              aria-current="page"
+              (click)="userLogout()"
+              >sair</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link position-relative" (click)="cartItens > 0 ? open() : null"
+              >Carrinho
+              <span
+                class="position-absolute top-0 translate-middl badge rounded-pill bg-danger"
+              >
+                {{ cartItens }}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </a>
+          </li>
         </ul>
         <!-- links type seller -->
         <ul *ngSwitchCase="'seller'" class="navbar-nav mb-2 mb-lg-0">

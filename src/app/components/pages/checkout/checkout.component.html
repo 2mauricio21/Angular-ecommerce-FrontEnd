@@ -1,0 +1,44 @@
+<div class="container py-5">
+  <h1 class="py-3 d-flex justify-content-center">
+    Confira seus dados de endereço para entrega
+  </h1>
+  <p *ngIf="orderMsg" class="alert alert-success" role="alert">{{orderMsg}}</p>
+  <div class="row">
+    <div class="col-sm-7">
+      <h3 class="py-3 d-flex justify-content-center">Digite seu endereço</h3>
+      <form #orderData="ngForm" (ngSubmit)="orderNow(orderData.value)" class="d-flex flex-column">
+        <input
+          type="email"
+          class="form-control mx-auto mb-3"
+          name="email"
+          placeholder="Digite seu Email"
+          ngModel
+          required
+        />
+        <input
+          type="text"
+          class="form-control mx-auto mb-3"
+          name="address"
+          placeholder="Digite seu endereço"
+          ngModel
+          required
+        />
+        <input
+          type="text"
+          class="form-control mx-auto mb-3"
+          name="contact"
+          placeholder="Digite seu telefone"
+          ngModel
+          required
+        />
+        <button class="mx-auto btn btn-primary px-3 py-2">Comprar agora</button>
+      </form>
+    </div>
+    <div class="col-sm-5 ">
+      <h3 class="py-5 d-flex justify-content-center">Total a pagar: {{totalPrice | currency: 'BRL' : true}}</h3>
+      <h4 class="pt-3 d-flex justify-content-center">Metodo de pagamento :</h4>
+      <h4 class="d-flex justify-content-center"><b>pagamento na entrega</b></h4>
+    </div>
+
+  </div>
+</div>

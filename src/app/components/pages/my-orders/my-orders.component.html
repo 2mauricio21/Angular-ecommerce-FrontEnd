@@ -1,0 +1,37 @@
+<div class="my-orders order-data container text-center">
+  <h1>Meus Pedidos</h1>
+  <div class="row">
+    <div class="col-sm-2">
+      <span class="title">Pedido</span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">Pedido Id</span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">Preço</span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">Staus</span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">Ação</span>
+    </div>
+  </div>
+  <div class="row" *ngFor="let order of orderData">
+    <div class="col-sm-2">
+      <img class="order-img" src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/78045/shopping-cart-clipart-md.png" alt="cart">
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center align-items-center">
+      <span>#{{order.id}}</span>
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center align-items-center">
+      <span>{{order.totalprice}}</span>
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center align-items-center">
+      <span>Em processo</span>
+    </div>
+    <div class="col-sm-2 d-flex justify-content-center align-items-center">
+      <span><button (click)="cancelOrder(order.id)" class="btn btn-danger">Cancelar pedido</button></span>
+    </div>
+  </div>
+</div>

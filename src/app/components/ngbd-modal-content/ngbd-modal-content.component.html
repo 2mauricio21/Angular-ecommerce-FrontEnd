@@ -11,7 +11,7 @@
         <th scope="col">Nome</th>
         <th scope="col">Preço</th>
         <th scope="col">Qnt</th>
-        <th scope="col">Categoria</th>
+        <th scope="col">Ação</th>
       </tr>
     </thead>
     <tbody class="table-group">
@@ -22,7 +22,7 @@
         <td class="text-cart text-nowrap">{{ cart.name }}</td>
         <td>{{cart.price | currency:'BRL':true}}</td>
         <td>{{cartData?.length}}</td>
-        <td>{{cart.category}}</td>
+        <td><button (click)="removeToCart(cart.id!)" class="btn btn-danger">Excluir</button></td>
       </tr>
     </tbody>
 
@@ -33,18 +33,18 @@
       <tr>
         <th scope="col">Valor</th>
         <th scope="col">Imposto</th>
-        <th scope="col">Entrega</th>
+        <th scope="col">Frete</th>
         <th scope="col">Desconto</th>
         <th scope="col">Total</th>
       </tr>
     </thead>
     <tbody class="table-group-divider">
       <tr>
-        <td>{{priceSumary.price | currency: 'BRL': true}}</td>
-        <td>{{priceSumary.tax | currency: 'BRL': true}}</td>
-        <td>{{priceSumary.delivery | currency: 'BRL': true}}</td>
-        <td>{{priceSumary.discount | currency: 'BRL': true}}</td>
-        <td>{{priceSumary.total | currency: 'BRL': true}}</td>
+        <td>{{priceSummary.price | currency: 'BRL': true}}</td>
+        <td>{{priceSummary.tax | currency: 'BRL': true}}</td>
+        <td>{{priceSummary.delivery | currency: 'BRL': true}}</td>
+        <td>{{priceSummary.discount | currency: 'BRL': true}}</td>
+        <td>{{priceSummary.total | currency: 'BRL': true}}</td>
       </tr>
     </tbody>
   </table>
@@ -53,7 +53,7 @@
   <p>Quantidade: 
     <span>{{cartData?.length}}</span>
   </p>
-  <button type="button" class="btn btn-outline-success" (click)="activeModal.close('Close click')">
+  <button type="button" (click)="navigateCheckout()" class="btn btn-outline-success" (click)="activeModal.close('Close click')">
     Comprar
   </button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">

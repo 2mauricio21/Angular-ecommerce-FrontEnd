@@ -19,6 +19,8 @@ import { SearchComponent } from './components/pages/search/search.component';
 import { ProductDetailsComponent } from './components/pages/product-details/product-details.component';
 import { UserAuthComponent } from './components/pages/user-auth/user-auth.component';
 import { NgbdModalContentComponent } from './components/ngbd-modal-content/ngbd-modal-content.component';
+import { CheckoutComponent } from './components/pages/checkout/checkout.component';
+import { MyOrdersComponent } from './components/pages/my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { NgbdModalContentComponent } from './components/ngbd-modal-content/ngbd-
     ProductDetailsComponent,
     UserAuthComponent,
     NgbdModalContentComponent,
+    CheckoutComponent,
+    MyOrdersComponent,
   ],
   imports: [
     BrowserModule,

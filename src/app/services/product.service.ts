@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { ICart, IProduct } from '../models/data-types';
+import { ICart, IOrder, IProduct } from '../models/data-types';
 import { AuthServiceSeller } from './auth-seller.service';
 import { environment } from 'src/environment';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -80,6 +81,30 @@ export class ProductService {
   currentCart(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<ICart[]>(environment.apiKey + `/cart?userId=${userData.id}`);
+    if (userData && userData.id) {
+      return this.http.get<ICart[]>(`${environment.apiKey}/cart?userId=${userData.id}`);
+    } else {
+      return of([]); // Retorna um Observable vazio se não houver usuário logado
+    }
+  }
+
+  orderNow(data: IOrder){
+    return this.http.post(environment.apiKey + '/orders', data);
+  }
+  orderList(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    return this.http.get<IOrder[]>(environment.apiKey + `/orders?userId=`+ userData.id);
+  }
+  deleteCartItems(cartId:number){
+    return this.http.delete(environment.apiKey + '/cart/'+cartId, {observe: 'response'}). subscribe((result) => {
+      if(result){
+        this.cartData.emit([])
+      }
+    })
+  }
+  cancelOrder(orderId: number){
+    return this.http.delete(environment.apiKey + `/orders/${orderId}`);
+
   }
 }
