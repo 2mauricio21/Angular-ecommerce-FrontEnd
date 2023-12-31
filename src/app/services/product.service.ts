@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { IProduct } from '../models/data-types';
+import { EventEmitter, Injectable } from '@angular/core';
+import { ICart, IProduct } from '../models/data-types';
 import { AuthServiceSeller } from './auth-seller.service';
 import { environment } from 'src/environment';
 
@@ -8,6 +8,7 @@ import { environment } from 'src/environment';
   providedIn: 'root',
 })
 export class ProductService {
+  cartData = new EventEmitter<IProduct[] | []>()
   constructor(private http: HttpClient, private authService: AuthServiceSeller) {}
 
   addProduct(data: IProduct) {
@@ -38,5 +39,47 @@ export class ProductService {
     return this.http.get<IProduct[]>(
       environment.apiKey + `/product?q=${query}`
     );
+  }
+  localAddToCart(data: IProduct) {
+    let cartData: IProduct[] = [] 
+    let localCart = localStorage.getItem('localCart');
+    if(!localCart){
+      cartData.push(data);
+      localStorage.setItem('localCart', JSON.stringify([data]));
+    } else {
+      cartData = JSON.parse(localCart);      
+      if (!Array.isArray(cartData)) {
+        cartData = [cartData]; // Se não for um array, transforma em um array
+      }
+      cartData.push(data);
+      localStorage.setItem('localCart', JSON.stringify(cartData));
+    }
+    this.cartData.emit(cartData);    
+  }
+  addToCart(cartData: ICart){    
+    return this.http.post(environment.apiKey + '/cart', cartData);
+  }
+  removeItemFromCart(productId: number){
+    let cartData = localStorage.getItem('localCart');
+    if(cartData){
+      let cartDataParse : IProduct[] = JSON.parse(cartData);
+      cartDataParse = cartDataParse.filter((item: IProduct) => productId !== item.id);
+      localStorage.setItem('localCart', JSON.stringify(cartDataParse));
+      this.cartData.emit(cartDataParse);
+    }
+  }
+  removeToCart(cartId: number){
+    return this.http.delete(environment.apiKey + `/cart/${cartId}`);
+
+  }
+  getCartList(userId: number){
+    return this.http.get<IProduct[]>(environment.apiKey + `/cart?userId=${userId}`, {observe: 'response'}).subscribe((result) => {
+      this.cartData.emit(result.body || []);
+    })
+  }
+  currentCart(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    return this.http.get<ICart[]>(environment.apiKey + `/cart?userId=${userData.id}`);
   }
 }

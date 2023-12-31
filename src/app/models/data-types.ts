@@ -15,7 +15,9 @@ export interface IProduct {
   category: string,
   image: string,
   description: string,
-  sellerId: number; 
+  sellerId: number,
+  quantity: undefined | number; 
+  productId: number | undefined;
 }
 
 export interface IUserSignUp {
@@ -27,4 +29,24 @@ export interface IUserSignUp {
 export interface IUserLogin {
   email: string,
   password: string
+}
+
+export interface ICart {
+  id: number | undefined,
+  name: string,
+  price: number,
+  category: string,
+  color: string
+  image: string,
+  description: string,
+  userId: number,
+  productId: number; 
+}
+
+export interface IPriceSumary{
+  price: number,
+  discount: number,
+  tax: number,
+  delivery: number,
+  total: number;
 }

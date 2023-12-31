@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SearchComponent } from './components/pages/search/search.component';
 import { ProductDetailsComponent } from './components/pages/product-details/product-details.component';
 import { UserAuthComponent } from './components/pages/user-auth/user-auth.component';
+import { NgbdModalContentComponent } from './components/ngbd-modal-content/ngbd-modal-content.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UserAuthComponent } from './components/pages/user-auth/user-auth.compon
     SearchComponent,
     ProductDetailsComponent,
     UserAuthComponent,
+    NgbdModalContentComponent,
   ],
   imports: [
     BrowserModule,

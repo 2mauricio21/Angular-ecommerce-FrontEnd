@@ -52,7 +52,7 @@
           <button class="btn btn-outline-light" (click)="submitSearch(searchInput.value)">Pesquisar</button>
           <ul class="suggested-search" *ngIf="searchResult">
             <li *ngFor="let item of searchResult">
-              <a (mousedown)="redirectToDetails(item.id)"> {{ item.name }}</a>
+              <a (mousedown)="redirectToDetails(item.id!)"> {{ item.name }}</a>
             </li>
           </ul>
         </div>
@@ -79,8 +79,8 @@
               <span
                 class="position-absolute top-0 translate-middl badge rounded-pill bg-danger"
               >
-                0
-                <span class="visually-hidden">unread messages</span>
+                {{cartItens}}
+                <!-- class="visually-hidden" -->
               </span>
             </a>
           </li>
@@ -108,7 +108,7 @@
                 <span
                   class="position-absolute top-0 translate-middl badge rounded-pill bg-danger"
                 >
-                  0
+                {{cartItens}}
                   <span class="visually-hidden">unread messages</span>
                 </span>
               </a>

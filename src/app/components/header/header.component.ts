@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdModalContentComponent } from '../ngbd-modal-content/ngbd-modal-content.component';
 import { IProduct } from 'src/app/models/data-types';
 import { AuthServiceSeller } from 'src/app/services/auth-seller.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
   sellerName: string = '';
   searchResult: undefined | IProduct[];
   userName: string = '';
+  cartItens = 0;
   constructor(
     private modalService: NgbModal,
     private route: Router,
@@ -23,6 +25,13 @@ export class HeaderComponent implements OnInit {
   ) {}
   
   ngOnInit(): void {
+    let cartData = localStorage.getItem('localCart');
+    if(cartData){
+      this.cartItens = JSON.parse(cartData).length;
+    }
+    this.product.cartData.subscribe((item) => {
+      this.cartItens = item.length;
+    })
     this.route.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('seller') && val.url.includes('seller')) {
@@ -37,6 +46,7 @@ export class HeaderComponent implements OnInit {
           let userData = userStore && JSON.parse(userStore);
           this.userName = userData.nome;       
           this.menuType = 'user';
+          this.product.getCartList(userData.id);
         } else {
           this.menuType = 'default';
         }
@@ -51,11 +61,13 @@ export class HeaderComponent implements OnInit {
   userLogout(){
     localStorage.removeItem('user');
     this.menuType = 'default';
+    this.userName = '';
+    this.product.cartData.emit([]);
     this.route.navigate(['/user-auth']);
   }
 
   open() {
-    const modalRef = this.modalService.open(NgbdModalContent);
+    const modalRef = this.modalService.open(NgbdModalContentComponent);
     modalRef.componentInstance.name = `${this.userName || ''}`;
   }
 
@@ -79,37 +91,4 @@ export class HeaderComponent implements OnInit {
   redirectToDetails(productId: number){
     this.route.navigate([`/details/${productId}`]);
   }
-}
-
-@Component({
-  selector: 'ngbd-modal-content',
-  standalone: true,
-  template: `
-    <div class="modal-header">
-      <h4 class="modal-title">Carrinho de compra:</h4>
-      <button
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        (click)="activeModal.dismiss('Cross click')"
-      ></button>
-    </div>
-    <div class="modal-body">
-      <p>Olá, {{ name }}!</p>
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-outline-dark"
-        (click)="activeModal.close('Close click')"
-      >
-        Close
-      </button>
-    </div>
-  `,
-})
-export class NgbdModalContent {
-  @Input() name: any;
-
-  constructor(public activeModal: NgbActiveModal) {}
 }

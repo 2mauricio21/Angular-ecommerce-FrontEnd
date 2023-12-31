@@ -20,4 +20,5 @@ export class HomeComponent implements OnInit{
       this.trendyProducts = data;
     });
   }
+
 }

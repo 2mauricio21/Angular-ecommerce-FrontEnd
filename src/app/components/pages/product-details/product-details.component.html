@@ -11,8 +11,8 @@
       <h6>Descrição:</h6>
       <textarea class="description" readonly >{{productData.description}}</textarea>
       <button class="btn btn-outline-primary form-button ">Comprar</button>
-      <button class="btn btn-outline-danger form-button">Remover Produto</button>
-      <button class="btn btn-outline-primary form-button"> + Carrinho</button>
+      <button *ngIf="!removeCart" class="btn btn-outline-primary form-button" (click)="addToCart()"> + Carrinho</button>
+      <button *ngIf="removeCart" class="btn btn-outline-danger form-button" (click)="removeToCart(productData.id)">Remover Produto</button>
       <div class="quantity-group">
         <button (click)="handleQuntity('min')" class="btn btn-outline-success">-</button>
         <input class="btn btn-outline-dark" type="text" value="{{productQuantity}}" readonly>
