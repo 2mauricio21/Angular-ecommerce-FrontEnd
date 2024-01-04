@@ -18,7 +18,7 @@
       <textarea class="description" readonly>{{
         productData.description
       }}</textarea>
-      <button (click)="addToCart()" (click)="navigateCheckout()" class="btn btn-outline-primary form-button">Comprar</button>
+      <button (click)="navigateCheckout()" class="btn btn-outline-primary form-button">Comprar</button>
       <button
         *ngIf="!removeCart"
         class="btn btn-outline-primary form-button"
@@ -41,7 +41,6 @@
           class="btn btn-outline-dark"
           type="text"
           value="{{ productQuantity }}"
-          readonly
         />
         <button (click)="handleQuntity('plus')" class="btn btn-outline-success">
           +

@@ -38,7 +38,7 @@
         <div
           class="d-flex"
           role="search"
-          *ngIf="menuType === 'default' || 'user'"
+          *ngIf="menuType === 'default' || menuType === 'user'"
         >
           <input
             class="form-control me-2"
@@ -123,7 +123,6 @@
                 class="position-absolute top-0 translate-middl badge rounded-pill bg-danger"
               >
                 {{ cartItens }}
-                <span class="visually-hidden">unread messages</span>
               </span>
             </a>
           </li>

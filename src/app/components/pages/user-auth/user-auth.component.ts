@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserAuthComponent implements OnInit {
   constructor(private router: Router, private user: UserService, private product : ProductService) {}
   authError: string | undefined = "";
-  showLogin: boolean = false;
+  showLogin: boolean = true;
   msgErroCadastro: string | undefined;
 
   ngOnInit(): void {
@@ -34,18 +34,17 @@ export class UserAuthComponent implements OnInit {
     }
     this.user.userSignUp(data);
   }
-  login(data: IUserLogin){
-    this.user.userLogin(data);
-    this.user.invalidUserAuth.subscribe((result) => {
-      if(result){
+  login(data: IUserLogin) {
+    this.user.userLogin(data).subscribe((result) => {
+      if (result) {
         this.authError = "Email ou senha inválidos";
         setTimeout(() => {
           this.authError = "";
         }, 3000);
-      } else { 
-        this.localCartToRemoveCart()
+      } else {
+        this.localCartToRemoveCart();
       }
-    })
+    });
   }
   openLogin(){
     this.showLogin = true;
@@ -58,24 +57,30 @@ export class UserAuthComponent implements OnInit {
     return emailRegex.test(email);
   }
   localCartToRemoveCart(){
-    let user = localStorage.getItem('user');
-    let userId = user && JSON.parse(user).id;
     let data = localStorage.getItem('localCart');
+    let user  = localStorage.getItem('user');
+    let userId = user && JSON.parse(user).id;
+    console.log(userId);
+    console.log(userId);
+    console.log(userId);
+    
     if(data){
-      let cartDataList: IProduct[] = JSON.parse(data);
+      let cartDataList : [] = JSON.parse(data);
+      console.log(cartDataList);      
+
       cartDataList.forEach((product : IProduct, index) => {
-        let cartData: ICart = {
+        let cartData: ICart = { 
           ...product,
           productId: product.id,
-          userId,
+          userId: userId,
         };
         delete cartData.id;
         setTimeout(() => {
-          this.product.addToCart(cartData).subscribe((result: any) => {
+          this.product.addToCart(cartData).subscribe((result) => {
             if (result) {
-              console.warn("Produto Salvo com sucess");
+              console.warn("Dados Salvo com sucess");
             }
-          });
+          })
         }, 500);
         if(cartDataList.length === index + 1){
           localStorage.removeItem('localCart');

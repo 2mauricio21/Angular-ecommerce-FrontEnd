@@ -13,7 +13,7 @@
       </div>
       <div class="carousel-caption">
         <h3>{{ item.name }}</h3>
-        <p>{{ item.description }}</p>
+        <p class="description">{{ item.description }}</p>
       </div>
     </ng-template>
   </ngb-carousel>
@@ -36,8 +36,7 @@
             </div>
           </div>
           <div class="product-footer">
-            <a routerLink="/details/{{item.id}}">" + Detalhes do produto</a>
-            <a href="#">+ Carrinho</a>
+            <button class=" mx-auto btn btn-outline-success" routerLink="/details/{{item.id}}"> + Detalhes do produto</button>
           </div>
         </div>
       </div>

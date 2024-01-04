@@ -59,7 +59,7 @@
           type="email"
           class="form-control"
           placeholder="Digite seu email"
-          id="email"
+          #email="ngModel"
           ngModel
           name="email"
           required
@@ -71,8 +71,10 @@
           type="password"
           class="form-control"
           placeholder="Digite sua senha"
-          id="password"
+          #password="ngModel"
           ngModel
+          minlength="2"
+          maxlength="20"
           name="password"
           required
         />

@@ -25,13 +25,6 @@ export class HeaderComponent implements OnInit {
   ) {}
   
   ngOnInit(): void {
-    let cartData = localStorage.getItem('localCart');
-    if(cartData){
-      this.cartItens = JSON.parse(cartData).length;
-    }
-    this.product.cartData.subscribe((item) => {
-      this.cartItens = item.length;
-    })
     this.route.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('seller') && val.url.includes('seller')) {
@@ -49,9 +42,17 @@ export class HeaderComponent implements OnInit {
           this.product.getCartList(userData.id);
         } else {
           this.menuType = 'default';
+          this.userName = "Seja bem vindo"
         }
       }
     });
+    let cartData = localStorage.getItem('localCart');
+    if(cartData){
+      this.cartItens = JSON.parse(cartData).length;
+    }
+    this.product.cartData.subscribe((item) => {
+      this.cartItens = item.length;
+    }) 
   }
 
   logout() {

@@ -14,6 +14,7 @@ export class NgbdModalContentComponent implements OnInit {
   cartData: ICart[] | undefined;
   priceSummary: IPriceSumary = {
     price: 0,
+    quantity: 0,
     discount: 0,
     tax: 0,
     delivery: 100,
@@ -54,7 +55,7 @@ export class NgbdModalContentComponent implements OnInit {
         }
       })
     }
-    this.loadDetails()    
+    this.loadDetails() 
   }
 
   loadDetails(): void {
@@ -86,12 +87,19 @@ export class NgbdModalContentComponent implements OnInit {
   }
   calculatePriceSummary(): void {
     let price = 0;
+    let quantity = 0;
+  
     if (this.cartData) {
       this.cartData.forEach((item) => {
-        price += +item.price;
+        if (item.quantity) { 
+          price += +item.price * item.quantity; 
+          quantity += item.quantity; 
+        }
       });
     }
+  
     this.priceSummary.price = price;
+    this.priceSummary.quantity = quantity; 
     this.priceSummary.discount = price / 10;
     this.priceSummary.tax = price / 100;
     this.priceSummary.total = price - this.priceSummary.discount + this.priceSummary.tax + this.priceSummary.delivery;

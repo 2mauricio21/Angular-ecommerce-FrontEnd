@@ -8,6 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
+
 export class ProductDetailsComponent implements OnInit {
   productData: undefined | IProduct;
   productQuantity: number = 1;
@@ -23,22 +24,19 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     let productId = this.activeRoute.snapshot.paramMap.get('productId');
-    productId &&
-      this.product.getProduct(productId).subscribe((result) => {
-        this.productData = result;
-        let cartData = localStorage.getItem('localCart');
-        if (productId && cartData) {
-          let cartDataParse = JSON.parse(cartData);
-          cartDataParse = cartDataParse.filter(
-            (item: IProduct) => productId === item.id.toString()
-          );
-          if (cartDataParse.length) {
-            this.removeCart = true;
-          } else {
-            this.removeCart = false;
-          }
+    productId && this.product.getProduct(productId).subscribe((result) => {
+      this.productData = result;
+      let cartData = localStorage.getItem('localCart');
+      if (productId && cartData) {
+        let items = JSON.parse(cartData);
+        items = items.filter((item: IProduct) => productId == item.id.toString())
+        if (items.length) {
+          this.removeCart = true;
+        } else {
+          this.removeCart = false;
         }
-      });
+      }
+    });
     let user = localStorage.getItem('user');
     if (user) {
       let userId = user && JSON.parse(user).id;
@@ -47,7 +45,7 @@ export class ProductDetailsComponent implements OnInit {
         let item = result.filter(
           (item: IProduct) =>
             productId?.toString() === item.productId?.toString()
-        );
+        );  
         if (item.length) {
           this.cartData = item[0];
           this.removeCart = true;
@@ -66,7 +64,7 @@ export class ProductDetailsComponent implements OnInit {
     if (this.productData) {
       this.productData.quantity = this.productQuantity;
       if (!localStorage.getItem('user')) {
-        this.product.localAddToCart(this.productData);
+        this.product.localAddToCart(this.productData) ;
         this.removeCart = true;
       } else {
         let user = localStorage.getItem('user');
@@ -77,7 +75,6 @@ export class ProductDetailsComponent implements OnInit {
           productId: this.productData.id,
         };
         delete cartData.id;
-
         this.product.addToCart(cartData).subscribe((result) => {
           if (result) {
             this.product.getCartList(userId);
@@ -90,18 +87,17 @@ export class ProductDetailsComponent implements OnInit {
   removeToCart(productId: number) {
     if (!localStorage.getItem('user')) {
       this.product.removeItemFromCart(productId);
-      this.removeCart = false;
     } else {
+      let user = localStorage.getItem('user');
+      let userId = user && JSON.parse(user).id;
       this.cartData &&
         this.product.removeToCart(this.cartData.id).subscribe((result) => {
           if (result) {
-            let user = localStorage.getItem('user');
-            let userId = user && JSON.parse(user).id;
             this.product.getCartList(userId);
           }
         });
-      this.removeCart = false;
-    }
+      }
+    this.removeCart = false;
   }
   navigateCheckout(){
     if(!localStorage.getItem('user')){

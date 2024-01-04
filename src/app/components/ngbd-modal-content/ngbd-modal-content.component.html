@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
   <p>Olá {{ name }}!</p>
-  <table *ngFor="let cart of cartData" class="table text-center">
+  <table class="table text-center">
     <thead>
       <tr>
         <th scope="col"> PRODUTO</th>
@@ -14,14 +14,14 @@
         <th scope="col">Ação</th>
       </tr>
     </thead>
-    <tbody class="table-group">
+    <tbody *ngFor="let cart of cartData" class="table-group">
       <tr (click)="navigateToProductDetail((cart.productId !== undefined) ? cart.productId : (cart.id !== undefined ? cart.id : -1))" style="cursor: pointer;">
         <td>
           <img class="img-thumbnail" style="width: 4rem" src="{{ cart.image }}" alt="{{ cart.name }}" />
         </td>
         <td class="text-cart text-nowrap">{{ cart.name }}</td>
         <td>{{cart.price | currency:'BRL':true}}</td>
-        <td>{{cartData?.length}}</td>
+        <td>{{cart.quantity}}</td>
         <td><button (click)="removeToCart(cart.id!)" class="btn btn-danger">Excluir</button></td>
       </tr>
     </tbody>
