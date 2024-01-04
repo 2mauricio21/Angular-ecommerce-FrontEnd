@@ -1,0 +1,76 @@
+{
+  "seller": [
+    {
+      "nome": "Mauricio",
+      "email": "vendedor@gmail.com",
+      "password": "123",
+      "id": 1
+    }
+  ],
+  "product": [
+    {
+      "name": "Celular A51",
+      "price": "1500",
+      "color": "Preto",
+      "category": "Celular",
+      "image": "https://imgs.casasbahia.com.br/55058284/1g.jpg",
+      "description": "O Samsung Galaxy A51 é um smartphone Android de bom nível, ótimo para fotos, que pode satisfazer até o mais exigente dos usuários. Tem uma enorme tela Touchscreen de 6.5 polegadas com uma resolução de 2400x1080 pixel. Sobre as características deste Samsung Galaxy A51 na verdade não falta nada. Começando pelo LTE 4G que permite a transferência de dados e excelente navegação na internet, além de conectividade Wi-fi e GPS. Tem também leitor multimídia, rádio, videoconferência, TV e bluetooth. Enfatizamos a boa memória interna de 128 GB com a possibilidade de expansão.\nO Samsung Galaxy A51 é um produto com poucos concorrentes em termos de multimídia graças à câmera de 48 megapixels que permite ao Samsung Galaxy A51 tirar fotos fantásticas com uma resolução de 8000x6000 pixels e gravar vídeos em 4K a espantosa resolução de 3840x2160 pixels. Muito fino, 7.9 milímetros, o que torna o Samsung Galaxy A51 realmente interessante.",
+      "id": 1
+    },
+    {
+      "name": "PC Gamer ITX Arena, Ryzen 5 5600G",
+      "price": "2400",
+      "color": "Preto",
+      "category": "Computador",
+      "image": "https://m.media-amazon.com/images/I/61a30YVcP2L._AC_SL1500_.jpg",
+      "description": "PC Gamer ITX Arena, Ryzen 5 5600G, Radeon™ Graphics Vega 7, 16GB Ram, SSD 480GB, Gabinete RGB",
+      "id": 2
+    },
+    {
+      "name": "Kit Teclado Semi Mecânico Gamer Led Rgb Multimídia Mouse Laser 3 Botões Usb 2.0 ",
+      "price": "80",
+      "color": "preto RGB",
+      "category": "Periféricos",
+      "image": "https://m.media-amazon.com/images/I/61fE+UTLnpL._AC_SL1400_.jpg",
+      "description": "Kit Teclado Semi Mecânico Gamer Led Rgb Multimídia Mouse Laser 3 Botões Usb 2.0 Pc Computador Notebook Mac",
+      "id": 3
+    },
+    {
+      "name": "Big Mac ",
+      "price": "50",
+      "color": "Sem",
+      "category": "Lanches",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzwv3Ah9mXEf5bp3SjYXSuM11Vpqb5NiyYJw&usqp=CAU",
+      "description": "O McDonald's Big Mac® é um hambúrguer 100% bovino com um sabor como nenhum outro. A perfeição de dar água na boca começa com dois hambúrgueres 100% puros de carne bovina e molho Big Mac® imprensados entre um pão de gergelim. É finalizado com picles, alface picada, cebola picadinha e uma fatia de queijo americano.",
+      "id": 4
+    },
+    {
+      "name": "Kit 50 Unidades De Talheres Aço Inox Restaurante Jantar Bar",
+      "price": "148,87",
+      "color": "Prata",
+      "category": "Talheres",
+      "image": "https://http2.mlstatic.com/D_NQ_NP_610314-MLB50998693861_082022-O.webp",
+      "description": "- 50 Talheres Em Inox Alto Brilho - (20 Garfos, 10 Colheres E 20 Facas)\n\n- (Novo Modelo) Peas em Fino Acabamento em Inox.\n\n- ESPECIFICAES TCNICAS:\n\nFACA\n- Comprimento (cm): 22\n- Largura (cm): 1,9 cabo e 1,8 lmina\n- Espessura (mm): 1 lmina e 3 cabo\n- Peso: 40 gramas\n- Material: Ao Inox\n- Cor: Inox Polido\n\nGARFO\n- Comprimento (cm): 21\n- Largura (cm): 2 cabo e 2,3 Ponta\n- Espessura (mm): 2\n- Peso: 35 gramas\n- Material: Ao Inox\n- Cor: Inox Polido\n\nCOLHER\n- Comprimento (cm): 21,5\n- Largura (cm): 2 cabo e 4,5 Ponta\n- Espessura (mm): 2 cabo e 1 a concha\n- Peso: 40 gramas\n- Material: Ao Inox\n- Cor: Inox Polido\n\n- Itens Inclusos / CONTEDO Da Embalagem:\n\n- 20 Garfos\n- 10 Colheres\n- 20 Facas\n\n- Os demais itens das fotos so meramente ilustrativos e no fazem parte do contedo da embalagem.",
+      "id": 5
+    },
+    {
+      "name": "Echo Dot 5ª geração com Relógio | Smart speaker com Alexa | Display de LED ainda melhor",
+      "price": "476,10",
+      "color": "Azul Claro",
+      "category": "Tecnologia",
+      "image": "https://m.media-amazon.com/images/I/61Kh-Hle3-L._AC_SL1000_.jpg",
+      "description": "O ECHO DOT COM O MELHOR SOM JÁ LANÇADO - Curta uma experiência sonora ainda melhor em comparação às versões anteriores do Echo Dot com Alexa e ouça vocais mais nítidos, graves mais potentes e um som vibrante em qualquer ambiente.\nVEJA A HORA E MUITO MAIS - Display de LED aprimorado que, além de exibir hora e alarmes, mostra a previsão do tempo, títulos de músicas e muito mais.\nSUAS MÚSICAS E CONTEÚDOS FAVORITOS - Reproduza músicas e podcasts do Amazon Music, Apple Music, Spotify, entre outros, ou por Bluetooth em todos os ambientes da sua casa.\nSEMPRE DISPONÍVEL PARA AJUDAR - Pergunte a previsão do tempo para Alexa, defina timers com sua voz, obtenha respostas e ouça piadas. Precisa de mais uns minutinhos de sono pela manhã? É só tocar no seu Echo Dot com relógio para adiar o alarme.\nMAIS CONFORTO EM CASA - Controle dispositivos de casa inteligente compatíveis por voz ou com rotinas ativadas por sensores de temperatura internos. Crie rotinas para ligar o ar condicionado se a temperatura interna estiver mais quente que o ideal.\nDESENVOLVIDO PARA PROTEGER A SUA PRIVACIDADE - A Amazon não vende informações pessoais de clientes. O Echo Dot foi construído com várias camadas de controles de privacidade, incluindo o botão de desligar o microfone.\nAPROVEITE AO MÁXIMO O PAREAMENTO DE DISPOSITIVOS - Escute música na casa toda usando os dispositivos Echo compatíveis em cômodos diferentes ou crie um sistema de home theater com o Fire TV.",
+      "id": 6
+    }
+  ],
+  "user": [
+    {
+      "nome": "Mauricio",
+      "email": "user@gmail.com",
+      "password": "123",
+      "id": 1
+    }
+  ],
+  "orders": [],
+  "cart": []
+}

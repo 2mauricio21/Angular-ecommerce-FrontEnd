@@ -45,17 +45,14 @@ export class ProductService {
     let cartData: IProduct[] = [] 
     let localCart = localStorage.getItem('localCart');
     if(!localCart){
-      cartData.push(data);
       localStorage.setItem('localCart', JSON.stringify([data]));
+      this.cartData.emit([data]);
     } else {
       cartData = JSON.parse(localCart);      
-      if (!Array.isArray(cartData)) {
-        cartData = [cartData]; // Se não for um array, transforma em um array
-      }
       cartData.push(data);
       localStorage.setItem('localCart', JSON.stringify(cartData));
+      this.cartData.emit(cartData);    
     }
-    this.cartData.emit(cartData);    
   }
   addToCart(cartData: ICart){    
     return this.http.post(environment.apiKey + '/cart', cartData);
@@ -63,10 +60,10 @@ export class ProductService {
   removeItemFromCart(productId: number){
     let cartData = localStorage.getItem('localCart');
     if(cartData){
-      let cartDataParse : IProduct[] = JSON.parse(cartData);
-      cartDataParse = cartDataParse.filter((item: IProduct) => productId !== item.id);
-      localStorage.setItem('localCart', JSON.stringify(cartDataParse));
-      this.cartData.emit(cartDataParse);
+      let items : IProduct[] = JSON.parse(cartData);
+      items = items.filter((item: IProduct) => productId !== item.id);
+      localStorage.setItem('localCart', JSON.stringify(items));
+      this.cartData.emit(items);
     }
   }
   removeToCart(cartId: number){
@@ -74,8 +71,13 @@ export class ProductService {
 
   }
   getCartList(userId: number){
-    return this.http.get<IProduct[]>(environment.apiKey + `/cart?userId=${userId}`, {observe: 'response'}).subscribe((result) => {
-      this.cartData.emit(result.body || []);
+    return this.http
+      .get<IProduct[]>(environment.apiKey + `/cart?userId=${userId}`, {
+        observe: 'response',
+      }).subscribe((result) => {
+        if(result && result.body){ 
+          this.cartData.emit(result.body);
+        }
     })
   }
   currentCart(){

@@ -4,37 +4,44 @@ import { IUserLogin, IUserSignUp } from '../models/data-types';
 import { Router } from '@angular/router';
 import { environment } from 'src/environment';
 import { EventEmitter } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  constructor(private http: HttpClient, private router: Router) {}
 
-  invalidUserAuth = new EventEmitter<boolean>();
-  constructor(private http: HttpClient,private router: Router) { }
-
-  userSignUp(data: IUserSignUp){
+  userSignUp(data: IUserSignUp) {
     this.http
       .post(environment.apiKey + '/user', data, { observe: 'response' })
       .subscribe((result) => {
-        if(result){
+        if (result) {
           localStorage.setItem('user', JSON.stringify(result.body));
           this.router.navigate(['/']);
         }
       });
   }
-  userLogin(data: IUserLogin){
-    this.http.get<IUserSignUp[]>(environment.apiKey + `/user?email=${data.email}&password=${data.password}`,{ observe: 'response' })
-    .subscribe((result) => {
-      if (result && result.body?.length){
-        this.invalidUserAuth.emit(false);
-        localStorage.setItem('user', JSON.stringify(result.body[0]));
-        this.router.navigate(['/']);
-      } else {
-        this.invalidUserAuth.emit(true);
-      }
-    });
+  //aqui está tudo certo
+  userLogin(data: IUserLogin): Observable<boolean> {
+    return this.http
+    .get<IUserSignUp[]>(
+      environment.apiKey +
+        `/user?email=${data.email}&password=${data.password}`,
+      { observe: 'response' }
+    ).pipe(
+      map((result) => {
+        if (result && result.body) {
+          localStorage.setItem('user', JSON.stringify(result.body[0]));
+          this.router.navigate(['/']);
+          return false; // Login successful
+        } else {
+          return true; // Login failed
+        }
+      })
+    );
   }
+  //aqui está tudo certo
   userAuthReload() {
     if (localStorage.getItem('user')) {
       this.router.navigate(['/']);
@@ -44,5 +51,4 @@ export class UserService {
     localStorage.removeItem('user');
     this.router.navigate(['/']);
   }
-
 }

@@ -32,19 +32,20 @@ export interface IUserLogin {
 }
 
 export interface ICart {
-  quantity: any;
-  id: number | undefined,
   name: string,
   price: number,
   category: string,
   color: string
   image: string,
   description: string,
+  id: number | undefined,
+  quantity: number | undefined,
   userId: number,
   productId: number; 
 }
 
 export interface IPriceSumary{
+  quantity: number;
   price: number,
   discount: number,
   tax: number,
