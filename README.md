@@ -47,48 +47,16 @@ Este projeto é uma loja virtual desenvolvida em Angular, utilizando Bootstrap p
 npm install
 ```
 
-4. Instale o Json-server para testar o projeto:
-    - Crie uma pasta fora do projeto.
-    - Instale o Json-server globalmente executando o comando:
-
-```bash
-npm install -g json-server
-```
-
 ## Como Configurar o Banco de Dados para Teste
 
 Após a instalação do Json-server, siga as etapas abaixo para configurar o banco de dados de teste:
 
-1. Crie um arquivo chamado `db.json`.
-2. Abra o arquivo `db.json` e insira os seguintes endpoints:
-
-```json
-{
-  "seller": [
-    { }
-  ],
-  "product": [
-    {
-      "name": "Celular A51",
-      "price": "1500",
-      "color": "Preto",
-      "category": "Celular",
-      "image": "https://imgs.casasbahia.com.br/55058284/1g.jpg",
-      "description": "Celular muito bom",
-      "id": 1
-    },
-    // ...outros produtos
-  ],
-  "user": [
-    { }
-  ]
-}
-```
-
+1. Cheque se foi instalado todas as dependencias.
+2. abra dois terminais na pasta raiz do projeto:
 3. Execute o servidor Json-server no terminal com o seguinte comando, especificando o arquivo `db.json` e a porta desejada (nesse caso, 3001):
 
 ```bash
-json-server --watch db.json --port 3001
+  npm rum json-server
 ```
 
 4. Verifique o arquivo `environment.ts` dentro da pasta `src` do projeto para garantir que esteja configurado para rodar na mesma porta do servidor Json (neste caso, 3001).
