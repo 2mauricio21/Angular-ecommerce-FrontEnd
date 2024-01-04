@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ICart, IProduct, IUserLogin, IUserSignUp } from 'src/app/models/data-types';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
@@ -9,8 +9,9 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user-auth.component.html',
   styleUrls: ['./user-auth.component.scss']
 })
-export class UserAuthComponent implements OnInit {
-  constructor(private router: Router, private user: UserService, private product : ProductService) {}
+export class UserAuthComponent implements OnInit, OnDestroy {
+  constructor(private user: UserService, private product : ProductService) {}
+  private userLoginSubscription: Subscription | undefined;
   authError: string | undefined = "";
   showLogin: boolean = true;
   msgErroCadastro: string | undefined;
@@ -35,16 +36,30 @@ export class UserAuthComponent implements OnInit {
     this.user.userSignUp(data);
   }
   login(data: IUserLogin) {
-    this.user.userLogin(data).subscribe((result) => {
-      if (result) {
-        this.authError = "Email ou senha inválidos";
-        setTimeout(() => {
-          this.authError = "";
-        }, 3000);
-      } else {
-        this.localCartToRemoveCart();
+    // Crie a assinatura da Observable e armazene-a na propriedade
+    this.userLoginSubscription = this.user.userLogin(data).subscribe({
+      next: (success) => {
+        if (success) {
+          this.localCartToRemoveCart(); // Execute ações após login bem-sucedido
+        } else {
+          this.authError = "Email ou senha inválidos";
+          setTimeout(() => {
+            this.authError = "";
+          }, 3000);
+        }
+      },
+      error: (error) => {
+        console.error('Erro no login:', error);
+        this.authError = 'Erro ao tentar fazer login.';
       }
     });
+  }
+
+  ngOnDestroy() {
+    // Cancele a assinatura da Observable se ela existir
+    if (this.userLoginSubscription) {
+      this.userLoginSubscription.unsubscribe();
+    }
   }
   openLogin(){
     this.showLogin = true;
